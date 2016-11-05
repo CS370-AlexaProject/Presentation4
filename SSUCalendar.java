@@ -52,14 +52,17 @@ public class SSUCalendar extends Conversation {
     private final static Integer SPORTS_CALENDAR = 3;
     private final static Integer FAIL_CALENDAR = -1;
 
+    //** int continue_counter = 0; //will keep track of how many times you have entered the listThreeEventsAS function. //might need to add it to the function parameter.
     //Static Responses (For Demo)
     private final static String STATIC_AR_1 = "On October 25th 2016, Petition to withdraw from a class with a 20 dollar administration fee continues";
     private final static String STATIC_AR_2 = "On October 26th 2016, Petition to withdraw from a class with a 20 dollar administration fee continues";
     private final static String STATIC_AR_3 = "On October 27th 2016, Petition to withdraw from a class with a 20 dollar administration fee continues";
+    //** Add more STATIC_AR_# (academic responses)
     private final static String STATIC_SR_1 = "Women's golf tournament on October 25th 2016, at C S U San Marcos";
     private final static String STATIC_SR_2 = "Soccer game on October 27th 2016, against Cal State Dominguez Hills, at Sonoma State. Women at 12:30 P M and Men at 3 P M";
     private final static String STATIC_SR_3 = "Men's tennis match on October 28th 2016, at Saint Mary's Invitational";
-
+    //** Add more STATIC_SR_# (sport responses)
+	
     //Session state storage key
     private final static String SESSION_SSUCALENDAR_STATE = "GeneralCalendarState";
     private final static String SESSION_ACADEMICCALENDAR_STATE = "AcademicCalendarState";
@@ -217,17 +220,35 @@ public class SSUCalendar extends Conversation {
 	    session.setAttribute(SESSION_ACADEMICCALENDAR_STATE, STATE_WAITING_CONTINUE);
 	}
 	else if (session.getAttribute(SESSION_SPORTTYPE_STATE) != null && STATE_WAITING_WHATSUBCALENDAR.compareTo((Integer)session.getAttribute(SESSION_SPORTTYPE_STATE)) == 0){
-	    response = newAskResponse(STATIC_SR_1 + "," + STATIC_SR_2 + "," + STATIC_SR_3 + "," + "Would you like me to continue?", false, "Would you like me to continue?", false);
+		response = newAskResponse(STATIC_SR_1 + "," + STATIC_SR_2 + "," + STATIC_SR_3 + "," + "Would you like me to continue?", false, "Would you like me to continue?", false);
+	    	
+	    
 	    session.removeAttribute(SESSION_SPORTTYPE_STATE);
 	    session.setAttribute(SESSION_SPORTCALENDAR_STATE, STATE_WAITING_CONTINUE);
 	}
 	else if (session.getAttribute(SESSION_ACADEMICCALENDAR_STATE) != null && STATE_WAITING_CONTINUE.compareTo((Integer)session.getAttribute(SESSION_ACADEMICCALENDAR_STATE)) == 0) {
-	    response = newAskResponse("Academic Calendar events continuing..." + "Would you like to continue?", false, "Would you like to continue?", false);
-	    session.setAttribute(SESSION_ACADEMICCALENDAR_STATE, STATE_WAITING_CONTINUE);
+	     //**if (continue_counter == ?) {
+		response = newAskResponse("Academic Calendar events continuing..." + "Would you like to continue?", false, "Would you like to continue?", false);
+	        //continue_counter++;
+	    //**}
+	    //**else if (continue_counter == ?) {
+		//**respose = newAskResponse('String list of 3 events', false, "Would you like me to continue?", false);
+	    	//continue_counter++;
+	    //**}
+	    //** continue with if statement...
+	    session.setAttribute(SESSION_ACADEMICCALENDAR_STATE, STATE_WAITING_CONTINUE); //** this needs to stay out of the if statements
 	}
 	else if (session.getAttribute(SESSION_SPORTCALENDAR_STATE) != null && STATE_WAITING_CONTINUE.compareTo((Integer)session.getAttribute(SESSION_SPORTCALENDAR_STATE)) == 0) {
-	    response = newAskResponse("Sports Calendar events continuing..." + "Would you like to continue?", false, "Would you like to continue?", false);
-	    session.setAttribute(SESSION_SPORTCALENDAR_STATE, STATE_WAITING_CONTINUE);
+	    //**if (continue_counter == ?) {
+		response = newAskResponse("Sports Calendar events continuing..." + "Would you like to continue?", false, "Would you like to continue?", false);
+	        //continue_counter++;
+	    //**}
+	    //**else if (continue_counter == ?) {
+		//**respose = newAskResponse('String list of 3 events', false, "Would you like me to continue?", false);
+	    	//continue_counter++;
+	    //**}
+	    //** continue with if statement...
+	    session.setAttribute(SESSION_SPORTCALENDAR_STATE, STATE_WAITING_CONTINUE); //** this needs to stay out of the if statements
 	}
 	else {
 	    response = newTellResponse("I don't have any information on that.", false);
@@ -265,7 +286,7 @@ public class SSUCalendar extends Conversation {
 	return response;
     }
 
-    private SpeechletResponse listNextSpecificSubcalendarEvent(IntentRequest intentreq, Session session, String subcalendar_type) {
+    private SpeechletResponse listNextSpecificSubcalendarEvent(IntentRequest intentreq, Session session, String subcalendar_type) { //** make sure all the dates in here are up to date!
 	SpeechletResponse response = null;
 	if(session.getAttribute(SESSION_ACADEMICTYPE_STATE) != null && STATE_WAITING_WHATSUBCALENDAR.compareTo((Integer)session.getAttribute(SESSION_ACADEMICTYPE_STATE)) == 0){
 	    if (subcalendar_type == "holiday") {
