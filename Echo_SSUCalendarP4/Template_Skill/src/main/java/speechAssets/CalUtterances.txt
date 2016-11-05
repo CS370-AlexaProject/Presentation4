@@ -1,0 +1,89 @@
+SSUCalendarIntent what is happening today
+SSUCalendarIntent whats happening today
+SSUCalendarIntent what is going on today
+SSUCalendarIntent whats going on today
+
+SSUAcademicCalendarIntent what academic due dates are happening this week
+SSUAcademicCalendarIntent what academics are going on today
+SSUAcademicCalendarIntent are there any due dates that I need to know about
+SSUAcademicCalendarIntent whats happening this week in the academic calendar
+SSUAcademicCalendarIntent what holidays are coming up
+SSUAcademicCalendarIntent when is the next holiday
+SSUAcademicCalendarIntent when is the next day off of school
+SSUAcademicCalendarIntent is there anything due tomorrow
+SSUAcademicCalendarIntent school academic calendar
+SSUAcademicCalendarIntent university academic calendar
+
+SSUSportingEventsCalendarIntent are there any sporting events happening
+SSUSportingEventsCalendarIntent what sporting events are happening this week
+SSUSportingEventsCalendarIntent what sports are going on today
+SSUSportingEventsCalendarIntent basketball schedule
+SSUSportingEventsCalendarIntent soccer schedule
+SSUSportingEventsCalendarIntent volleyball schedule
+SSUSportingEventsCalendarIntent cross country schedule
+SSUSportingEventsCalendarIntent baseball schedule
+SSUSportingEventsCalendarIntent golf schedule
+SSUSportingEventsCalendarIntent tennis schedule
+SSUSportingEventsCalendarIntent water polo schedule
+SSUSportingEventsCalendarIntent game
+SSUSportingEventsCalendarIntent game schedule
+SSUSportingEventsCalendarIntent weekly sports calender
+SSUSportingEventsCalendarIntent weekly sporting events
+SSUSportingEventsCalendarIntent sports event schedule
+
+AMAZON.NoIntent none
+
+WhichCalendarA academic calendar
+WhichCalendarA academiccalendar
+WhichCalendarA academics
+WhichCalendarA academic
+
+WhichCalendarS sports
+WhichCalendarS sport
+WhichCalendarS sports calendar
+WhichCalendarS sportscalendar
+WhichCalendarS sport calendar
+WhichCalendarS sportcalendar
+WhichCalendarS sporting events calendar
+WhichCalendarS sporting calendar
+
+holidays holidays
+holidays holiday
+
+academicdates academic dates
+academicdates academicdates
+academicdates academic date
+academicdates academicdate
+
+financialdeadlines financial deadlines
+financialdeadlines financialdeadlines
+financialdeadlines financial deadline
+financialdeadlines financialdeadline
+
+soccer soccer
+soccer soccor
+
+volleyball volleyball
+volleyball volley ball
+
+crosscountry cross country
+crosscountry crosscountry
+
+golf golf
+
+tennis tennis
+
+basketball basketball
+basketball basket ball
+
+baseball baseball
+baseball base ball
+
+trackandfield track and field
+trackandfield trackandfield
+
+waterpolo water polo
+waterpolo waterpolo
+
+softball softball
+softball soft ball
