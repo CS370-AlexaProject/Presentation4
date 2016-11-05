@@ -1,0 +1,5 @@
+com/neong/voice/model/base/Conversation.class
+com/neong/voice/handler/TemplateSpeechletRequestStreamHandler.class
+com/neong/voice/model/interfaces/ConversationInterface.class
+com/neong/voice/example/SSUCalendar.class
+com/neong/voice/speechlet/TemplateBaseSkillSpeechlet.class
