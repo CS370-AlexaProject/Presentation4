@@ -37,7 +37,7 @@ public class SSUCalendar extends Conversation {
     private final static String INTENT_SPORTTYPETF = "trackandfield";
     private final static String INTENT_SPORTTYPEWP = "waterpolo";
     private final static String INTENT_SPORTTYPESB = "softball";
-    
+
     //Slots
     private final static String SLOT_RELATIVE_TIME = "timeOfDay";
 
@@ -52,24 +52,55 @@ public class SSUCalendar extends Conversation {
     private final static Integer SPORTS_CALENDAR = 3;
     private final static Integer FAIL_CALENDAR = -1;
 
-    //** int continue_counter = 0; //will keep track of how many times you have entered the listThreeEventsAS function. //might need to add it to the function parameter.
+    //** int continue_counter = 0; //will keep track of how many times you have entered the listThreeEventsAS function. 
+    ////might need to add it to the function parameter.
     //Static Responses (For Demo)
-    private final static String STATIC_AR_1 = "On October 25th 2016, Petition to withdraw from a class with a 20 dollar administration fee continues";
-    private final static String STATIC_AR_2 = "On October 26th 2016, Petition to withdraw from a class with a 20 dollar administration fee continues";
-    private final static String STATIC_AR_3 = "On October 27th 2016, Petition to withdraw from a class with a 20 dollar administration fee continues";
-    //** Add more STATIC_AR_# (academic responses)
+    private final static String STATIC_AR_1 = "On November 14th, registration for spring 2017 begins by appointment";
+    private final static String STATIC_AR_2 = "on November 15th, last day to petition to withdraw from a class with a 20 dollar administrative fee";
+    private final static String STATIC_AR_3 = "on November 15th, spring 2017 registration by appointment continues";
+	private final static String STATIC_AR_4 = "on November 16th, spring 2017 registration by appointment continues";
+   	private final static String STATIC_AR_5 = "on November 17th, spring 2017 registration by appointment continues"; 
+	private final static String STATIC_AR_6 = "On November 18th, spring 2017 registration by appointment continues";
+	private final static String STATIC_AR_7 = "On November 19th, spring 2017 registration continues";
+	private final static String STATIC_AR_8 = "on November 20th, spring 2017 registration continues"; 
+	private final static String STATIC_AR_9 = "on November 21st, spring 2017 registration continues";
+	private final static String STATIC_AR_10 = "on November 22nd, spring 2017 registration continues";
+	private final static String STATIC_AR_11 = "on November 23rd, spring 2016 registration continues";
+	private final static String STATIC_AR_12 = "on November 23rd, Thanksgiving break begins";
+	private final static String STATIC_AR_13 = "on November 24th, spring 2017 registration continues";
+	private final static String STATIC_AR_14 = "on November 24th, Thanksgiving break continues";
+	private final static String STATIC_AR_15 = "on November 25th, spring 2017 registration continues";
+	private final static String STATIC_AR_16 = "on November 25th, Last day of Thanksgiving break";
+	private final static String STATIC_AR_17 = "on November 26th, spring 2017 registration continues";
+	private final static String STATIC_AR_18 = "on November 27th, spring 2017 registration continues";
+	private final static String STATIC_AR_19 = "on November 28th, spring 2017 registration continues";
+	private final static String STATIC_AR_20 = "on November 29th, spring 2017 registration continues";
+	private final static String STATIC_AR_21 = "on November 30th, spring 2017 registration continues";
+	private final static String STATIC_AR_22 = "on December 1st, spring 2017 registration contiues";
+	private final static String STATIC_AR_23 = "on December 1st, the Thesis deadline for December 2016 graduates";
+	private final static String STATIC_AR_24 = "on December 2nd, spring 2017 registration continues";
+	private final static String STATIC_AR_25 = "on December 3rd, spring 2017 registration continues";
+	private final static String STATIC_AR_26 = "on December 4th, spring 2017 registration continues";
+	private final static String STATIC_AR_27 = "on December 5th, spring 2017 registration continues";
+	private final static String STATIC_AR_28 = "on December 6th, spring 2017 Registration continues";
+	private final static String STATIC_AR_29 = "on December 7th, spring 2017 registration continues";
+	private final static String STATIC_AR_30 = "on December 8th, spring 2017 registration continues";
+	private final static String STATIC_AR_31 = "on December 9th, Spring 2017 registration continues";
+	private final static String STATIC_AR_32 = "on December 9th, Last day for full term withdrawl with no refund";
+
+  //** Add more STATIC_AR_# (academic responses)
     private final static String STATIC_SR_1 = "Women's golf tournament on October 25th 2016, at C S U San Marcos";
     private final static String STATIC_SR_2 = "Soccer game on October 27th 2016, against Cal State Dominguez Hills, at Sonoma State. Women at 12:30 P M and Men at 3 P M";
     private final static String STATIC_SR_3 = "Men's tennis match on October 28th 2016, at Saint Mary's Invitational";
     //** Add more STATIC_SR_# (sport responses)
-	
+
     //Session state storage key
     private final static String SESSION_SSUCALENDAR_STATE = "GeneralCalendarState";
     private final static String SESSION_ACADEMICCALENDAR_STATE = "AcademicCalendarState";
     private final static String SESSION_SPORTCALENDAR_STATE = "SportsCalendarState";
     private final static String SESSION_ACADEMICTYPE_STATE = "AcademicType";
     private final static String SESSION_SPORTTYPE_STATE = "SportType";
-    
+
     public SSUCalendar() {
 	super();
 
@@ -97,110 +128,110 @@ public class SSUCalendar extends Conversation {
     }
 
 
-        @Override
-	public SpeechletResponse respondToIntentRequest(IntentRequest intentReq, Session session) {
-	    Intent intent = intentReq.getIntent();
-	    String intentName = (intent != null) ? intent.getName() : null;
-	    Map<String, Slot> slots = intent.getSlots();  // get slots
+            @Override
+	    public SpeechletResponse respondToIntentRequest(IntentRequest intentReq, Session session) {
+		Intent intent = intentReq.getIntent();
+		String intentName = (intent != null) ? intent.getName() : null;
+		Map<String, Slot> slots = intent.getSlots();  // get slots
 
-	    SpeechletResponse response = null;
+		SpeechletResponse response = null;
 
-	    // Initial User Question
-	    if (INTENT_SSUCALENDAR.equals(intentName)) { //#1 //Works
-		Slot dateSlot = slots.get("Date");
-		String dateRequest = dateSlot.getValue();
-		response = listThreeEventsGASIntent(GENERAL_CALENDAR, intentReq, session);
-	    }
-	    else if (INTENT_SSUACADEMICC.equals(intentName)) { //#2 //Works
-		response = handleWhatSubcalendarType(intentReq, session, ACADEMIC_CALENDAR);
-	    }
-	    else if (INTENT_SSUSPORTSC.equals(intentName)) { //#3 //Works
-		response = handleWhatSubcalendarType(intentReq, session, SPORTS_CALENDAR);
-	    }
-	    // 1st Continuation for GenCal
-	    else if(INTENT_WHICHCALENDARA.equals(intentName)) { //#4 //Response1/3 to #1 //Works 
-		response = handleWhatSubcalendarType(intentReq, session, ACADEMIC_CALENDAR);
-	    }
-	    else if(INTENT_WHICHCALENDARS.equals(intentName)) { //#5 //Response2/3 to #1 //Works
-		response = handleWhatSubcalendarType(intentReq, session, SPORTS_CALENDAR);
-	    }
-	    // Getting into specific Calendars
-	    else if("AMAZON.YesIntent".equals(intentName)) {
-		// Continuing Specific Calendars
-		if (session.getAttribute(SESSION_ACADEMICCALENDAR_STATE) != null && STATE_WAITING_CONTINUE.compareTo((Integer)session.getAttribute(SESSION_ACADEMICCALENDAR_STATE)) == 0) {
-		    response = listThreeEventsASIntent(ACADEMIC_CALENDAR, intentReq, session);
+		// Initial User Question
+		if (INTENT_SSUCALENDAR.equals(intentName)) { //#1 //Works
+		    Slot dateSlot = slots.get("Date");
+		    String dateRequest = dateSlot.getValue();
+		    response = listThreeEventsGASIntent(GENERAL_CALENDAR, intentReq, session);
 		}
-		else if (session.getAttribute(SESSION_SPORTCALENDAR_STATE) != null && STATE_WAITING_CONTINUE.compareTo((Integer)session.getAttribute(SESSION_SPORTCALENDAR_STATE)) == 0){
-		    response = listThreeEventsASIntent(SPORTS_CALENDAR, intentReq, session);
+		else if (INTENT_SSUACADEMICC.equals(intentName)) { //#2 //Works
+		    response = handleWhatSubcalendarType(intentReq, session, ACADEMIC_CALENDAR);
 		}
-		// Continuing Specific Subcalendars
-		else {
-		    response = newTellResponse("Did you even listen to my question?", false);
+		else if (INTENT_SSUSPORTSC.equals(intentName)) { //#3 //Works
+		    response = handleWhatSubcalendarType(intentReq, session, SPORTS_CALENDAR);
 		}
-	    }
-	    else if("AMAZON.NoIntent".equals(intentName)) {
-		if (session.getAttribute(SESSION_SSUCALENDAR_STATE) != null && STATE_WAITING_WHATCALENDAR.compareTo((Integer)session.getAttribute(SESSION_SSUCALENDAR_STATE)) == 0) { //#7a //Response3/3 to #1 //Works
-		    response = newTellResponse("Have a nice day", false);
+		// 1st Continuation for GenCal
+		else if(INTENT_WHICHCALENDARA.equals(intentName)) { //#4 //Response1/3 to #1 //Works
+		    response = handleWhatSubcalendarType(intentReq, session, ACADEMIC_CALENDAR);
 		}
-		else if (session.getAttribute(SESSION_ACADEMICTYPE_STATE) != null && STATE_WAITING_WHATSUBCALENDAR.compareTo((Integer)session.getAttribute(SESSION_ACADEMICTYPE_STATE)) == 0) {
-		    response = listThreeEventsASIntent(ACADEMIC_CALENDAR, intentReq, session);
+		else if(INTENT_WHICHCALENDARS.equals(intentName)) { //#5 //Response2/3 to #1 //Works
+		    response = handleWhatSubcalendarType(intentReq, session, SPORTS_CALENDAR);
 		}
-		else if (session.getAttribute(SESSION_SPORTTYPE_STATE) != null && STATE_WAITING_WHATSUBCALENDAR.compareTo((Integer)session.getAttribute(SESSION_SPORTTYPE_STATE)) == 0) {
-		    response = listThreeEventsASIntent(SPORTS_CALENDAR, intentReq, session);
+		// Getting into specific Calendars
+		else if("AMAZON.YesIntent".equals(intentName)) {
+		    // Continuing Specific Calendars
+		    if (session.getAttribute(SESSION_ACADEMICCALENDAR_STATE) != null && STATE_WAITING_CONTINUE.compareTo((Integer)session.getAttribute(SESSION_ACADEMICCALENDAR_STATE)) == 0) {
+			response = listThreeEventsASIntent(ACADEMIC_CALENDAR, intentReq, session);
+		    }
+		    else if (session.getAttribute(SESSION_SPORTCALENDAR_STATE) != null && STATE_WAITING_CONTINUE.compareTo((Integer)session.getAttribute(SESSION_SPORTCALENDAR_STATE)) == 0){
+			response = listThreeEventsASIntent(SPORTS_CALENDAR, intentReq, session);
+		    }
+		    // Continuing Specific Subcalendars
+		    else {
+			response = newTellResponse("Did you even listen to my question?", false);
+		    }
 		}
-		else if ((session.getAttribute(SESSION_ACADEMICCALENDAR_STATE) != null && STATE_WAITING_CONTINUE.compareTo((Integer)session.getAttribute(SESSION_ACADEMICCALENDAR_STATE)) == 0) || (session.getAttribute(SESSION_SPORTCALENDAR_STATE) != null && STATE_WAITING_CONTINUE.compareTo((Integer)session.getAttribute(SESSION_SPORTCALENDAR_STATE)) == 0)) {
-		    response = newTellResponse("Have a nice day", false);
+		else if("AMAZON.NoIntent".equals(intentName)) {
+		    if (session.getAttribute(SESSION_SSUCALENDAR_STATE) != null && STATE_WAITING_WHATCALENDAR.compareTo((Integer)session.getAttribute(SESSION_SSUCALENDAR_STATE)) == 0) { //#7a //Response3/3 to #1 //Works
+			response = newTellResponse("Have a nice day", false);
+		    }
+		    else if (session.getAttribute(SESSION_ACADEMICTYPE_STATE) != null && STATE_WAITING_WHATSUBCALENDAR.compareTo((Integer)session.getAttribute(SESSION_ACADEMICTYPE_STATE)) == 0) {
+			response = listThreeEventsASIntent(ACADEMIC_CALENDAR, intentReq, session);
+		    }
+		    else if (session.getAttribute(SESSION_SPORTTYPE_STATE) != null && STATE_WAITING_WHATSUBCALENDAR.compareTo((Integer)session.getAttribute(SESSION_SPORTTYPE_STATE)) == 0) {
+			response = listThreeEventsASIntent(SPORTS_CALENDAR, intentReq, session);
+		    }
+		    else if ((session.getAttribute(SESSION_ACADEMICCALENDAR_STATE) != null && STATE_WAITING_CONTINUE.compareTo((Integer)session.getAttribute(SESSION_ACADEMICCALENDAR_STATE)) == 0) || (session.getAttribute(SESSION_SPORTCALENDAR_STATE) != null && STATE_WAITING_CONTINUE.compareTo((Integer)session.getAttribute(SESSION_SPORTCALENDAR_STATE)) == 0)) {
+			response = newTellResponse("Have a nice day", false);
+		    }
+		    else {
+			response = newTellResponse("Did you even listen to my question?", false);
+		    }
 		}
-		else {
-		    response = newTellResponse("Did you even listen to my question?", false);
+		// Getting into specific Subcalendars
+		else if (INTENT_ACADEMICTYPEH.equals(intentName)) {
+		    response = listNextSpecificSubcalendarEvent(intentReq, session, "holiday");
 		}
-	    }
-	    // Getting into specific Subcalendars
-	    else if (INTENT_ACADEMICTYPEH.equals(intentName)) {
-		response = listNextSpecificSubcalendarEvent(intentReq, session, "holiday");
-	    }
-	    else if (INTENT_ACADEMICTYPEAD.equals(intentName)) {
-		response = listNextSpecificSubcalendarEvent(intentReq, session, "academicdate");
-	    }
-	    else if (INTENT_ACADEMICTYPEFD.equals(intentName)) {
-		response = listNextSpecificSubcalendarEvent(intentReq, session, "financialdeadline");
-	    }
-	    else if (INTENT_SPORTTYPES.equals(intentName)) {
-		response = listNextSpecificSubcalendarEvent(intentReq, session, "soccer");
-	    }
-	    else if (INTENT_SPORTTYPEV.equals(intentName)) {
-		response = listNextSpecificSubcalendarEvent(intentReq, session, "volleyball");
-	    }
-	    else if (INTENT_SPORTTYPECC.equals(intentName)) {
-		response = listNextSpecificSubcalendarEvent(intentReq, session, "crosscountry");
-	    }
-	    else if (INTENT_SPORTTYPEG.equals(intentName)) { 
-		response = listNextSpecificSubcalendarEvent(intentReq, session, "golf");
-	    }
-	    else if (INTENT_SPORTTYPET.equals(intentName)) {
-		response = listNextSpecificSubcalendarEvent(intentReq, session, "tennis");
-	    }
-	    else if (INTENT_SPORTTYPEB.equals(intentName)) {
-		response = listNextSpecificSubcalendarEvent(intentReq, session, "basketball");
-	    }
-	    else if (INTENT_SPORTTYPEBB.equals(intentName)) {
-		response = listNextSpecificSubcalendarEvent(intentReq, session, "baseball");
-	    }
-	    else if (INTENT_SPORTTYPETF.equals(intentName)) {
-		response = listNextSpecificSubcalendarEvent(intentReq, session, "trackandfield");
-	    }
-	    else if (INTENT_SPORTTYPEWP.equals(intentName)) {
-		response = listNextSpecificSubcalendarEvent(intentReq, session, "waterpolo");
-	    }
-	    else if (INTENT_SPORTTYPESB.equals(intentName)) {
-		response = listNextSpecificSubcalendarEvent(intentReq, session, "softball");
+		else if (INTENT_ACADEMICTYPEAD.equals(intentName)) {
+		    response = listNextSpecificSubcalendarEvent(intentReq, session, "academicdate");
 		}
-	    else{
-		response = newTellResponse("Fail.", false);
+		else if (INTENT_ACADEMICTYPEFD.equals(intentName)) {
+		    response = listNextSpecificSubcalendarEvent(intentReq, session, "financialdeadline");
+		}
+		else if (INTENT_SPORTTYPES.equals(intentName)) {
+		    response = listNextSpecificSubcalendarEvent(intentReq, session, "soccer");
+		}
+		else if (INTENT_SPORTTYPEV.equals(intentName)) {
+		    response = listNextSpecificSubcalendarEvent(intentReq, session, "volleyball");
+		}
+		else if (INTENT_SPORTTYPECC.equals(intentName)) {
+		    response = listNextSpecificSubcalendarEvent(intentReq, session, "crosscountry");
+		}
+		else if (INTENT_SPORTTYPEG.equals(intentName)) {
+		    response = listNextSpecificSubcalendarEvent(intentReq, session, "golf");
+		}
+		else if (INTENT_SPORTTYPET.equals(intentName)) {
+		    response = listNextSpecificSubcalendarEvent(intentReq, session, "tennis");
+		}
+		else if (INTENT_SPORTTYPEB.equals(intentName)) {
+		    response = listNextSpecificSubcalendarEvent(intentReq, session, "basketball");
+		}
+		else if (INTENT_SPORTTYPEBB.equals(intentName)) {
+		    response = listNextSpecificSubcalendarEvent(intentReq, session, "baseball");
+		}
+		else if (INTENT_SPORTTYPETF.equals(intentName)) {
+		    response = listNextSpecificSubcalendarEvent(intentReq, session, "trackandfield");
+		}
+		else if (INTENT_SPORTTYPEWP.equals(intentName)) {
+		    response = listNextSpecificSubcalendarEvent(intentReq, session, "waterpolo");
+		}
+		else if (INTENT_SPORTTYPESB.equals(intentName)) {
+		    response = listNextSpecificSubcalendarEvent(intentReq, session, "softball");
+		}
+		else{
+		    response = newTellResponse("Fail.", false);
+		}
+		return response;
 	    }
-	    return response;
-	}
-    
+
     private SpeechletResponse listThreeEventsGASIntent(int calendar_type, IntentRequest intentreq, Session session){ //#1 //Works
 	SpeechletResponse response = null;
 	if (calendar_type == GENERAL_CALENDAR){
@@ -220,32 +251,32 @@ public class SSUCalendar extends Conversation {
 	    session.setAttribute(SESSION_ACADEMICCALENDAR_STATE, STATE_WAITING_CONTINUE);
 	}
 	else if (session.getAttribute(SESSION_SPORTTYPE_STATE) != null && STATE_WAITING_WHATSUBCALENDAR.compareTo((Integer)session.getAttribute(SESSION_SPORTTYPE_STATE)) == 0){
-		response = newAskResponse(STATIC_SR_1 + "," + STATIC_SR_2 + "," + STATIC_SR_3 + "," + "Would you like me to continue?", false, "Would you like me to continue?", false);
-	    	
-	    
+	    response = newAskResponse(STATIC_SR_1 + "," + STATIC_SR_2 + "," + STATIC_SR_3 + "," + "Would you like me to continue?", false, "Would you like me to continue?", false);
+
+
 	    session.removeAttribute(SESSION_SPORTTYPE_STATE);
 	    session.setAttribute(SESSION_SPORTCALENDAR_STATE, STATE_WAITING_CONTINUE);
 	}
 	else if (session.getAttribute(SESSION_ACADEMICCALENDAR_STATE) != null && STATE_WAITING_CONTINUE.compareTo((Integer)session.getAttribute(SESSION_ACADEMICCALENDAR_STATE)) == 0) {
-	     //**if (continue_counter == ?) {
-		response = newAskResponse("Academic Calendar events continuing..." + "Would you like to continue?", false, "Would you like to continue?", false);
-	        //continue_counter++;
+	    //**if (continue_counter == ?) {
+	    response = newAskResponse("Academic Calendar events continuing..." + "Would you like to continue?", false, "Would you like to continue?", false);
+	    //continue_counter++;
 	    //**}
 	    //**else if (continue_counter == ?) {
-		//**respose = newAskResponse('String list of 3 events', false, "Would you like me to continue?", false);
-	    	//continue_counter++;
+	    //**respose = newAskResponse('String list of 3 events', false, "Would you like me to continue?", false);
+	    //continue_counter++;
 	    //**}
 	    //** continue with if statement...
 	    session.setAttribute(SESSION_ACADEMICCALENDAR_STATE, STATE_WAITING_CONTINUE); //** this needs to stay out of the if statements
 	}
 	else if (session.getAttribute(SESSION_SPORTCALENDAR_STATE) != null && STATE_WAITING_CONTINUE.compareTo((Integer)session.getAttribute(SESSION_SPORTCALENDAR_STATE)) == 0) {
 	    //**if (continue_counter == ?) {
-		response = newAskResponse("Sports Calendar events continuing..." + "Would you like to continue?", false, "Would you like to continue?", false);
-	        //continue_counter++;
+	    response = newAskResponse("Sports Calendar events continuing..." + "Would you like to continue?", false, "Would you like to continue?", false);
+	    //continue_counter++;
 	    //**}
 	    //**else if (continue_counter == ?) {
-		//**respose = newAskResponse('String list of 3 events', false, "Would you like me to continue?", false);
-	    	//continue_counter++;
+	    //**respose = newAskResponse('String list of 3 events', false, "Would you like me to continue?", false);
+	    //continue_counter++;
 	    //**}
 	    //** continue with if statement...
 	    session.setAttribute(SESSION_SPORTCALENDAR_STATE, STATE_WAITING_CONTINUE); //** this needs to stay out of the if statements
@@ -255,7 +286,7 @@ public class SSUCalendar extends Conversation {
 	}
 	return response;
     }
-    
+
     private SpeechletResponse handleWhatSubcalendarType(IntentRequest intentreq, Session session, int calendar_type) {
 	SpeechletResponse response = null;
 	if (session.getAttribute(SESSION_SSUCALENDAR_STATE) != null && STATE_WAITING_WHATCALENDAR.compareTo((Integer)session.getAttribute(SESSION_SSUCALENDAR_STATE)) == 0){
