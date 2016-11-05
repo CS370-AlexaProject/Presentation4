@@ -27,7 +27,7 @@ public class SSUCalendar extends Conversation {
     private final static String INTENT_ACADEMICTYPEH = "holidays";
     private final static String INTENT_ACADEMICTYPEAD = "academicdates";
     private final static String INTENT_ACADEMICTYPEFD = "financialdeadlines";
-    private final static String INTENT_SPORTTYPES = "soccor";
+    private final static String INTENT_SPORTTYPES = "soccer";
     private final static String INTENT_SPORTTYPEV = "volleyball";
     private final static String INTENT_SPORTTYPECC = "crosscountry";
     private final static String INTENT_SPORTTYPEG = "golf";
@@ -57,7 +57,7 @@ public class SSUCalendar extends Conversation {
     private final static String STATIC_AR_2 = "On October 26th 2016, Petition to withdraw from a class with a 20 dollar administration fee continues";
     private final static String STATIC_AR_3 = "On October 27th 2016, Petition to withdraw from a class with a 20 dollar administration fee continues";
     private final static String STATIC_SR_1 = "Women's golf tournament on October 25th 2016, at C S U San Marcos";
-    private final static String STATIC_SR_2 = "Soccor game on October 27th 2016, against Cal State Dominguez Hills, at Sonoma State. Women at 12:30 P M and Men at 3 P M";
+    private final static String STATIC_SR_2 = "Soccer game on October 27th 2016, against Cal State Dominguez Hills, at Sonoma State. Women at 12:30 P M and Men at 3 P M";
     private final static String STATIC_SR_3 = "Men's tennis match on October 28th 2016, at Saint Mary's Invitational";
 
     //Session state storage key
@@ -163,7 +163,7 @@ public class SSUCalendar extends Conversation {
 		response = listNextSpecificSubcalendarEvent(intentReq, session, "financialdeadline");
 	    }
 	    else if (INTENT_SPORTTYPES.equals(intentName)) {
-		response = listNextSpecificSubcalendarEvent(intentReq, session, "soccor");
+		response = listNextSpecificSubcalendarEvent(intentReq, session, "soccer");
 	    }
 	    else if (INTENT_SPORTTYPEV.equals(intentName)) {
 		response = listNextSpecificSubcalendarEvent(intentReq, session, "volleyball");
@@ -282,8 +282,8 @@ public class SSUCalendar extends Conversation {
 	    }
 	}
 	else if(session.getAttribute(SESSION_SPORTTYPE_STATE) != null && STATE_WAITING_WHATSUBCALENDAR.compareTo((Integer)session.getAttribute(SESSION_SPORTTYPE_STATE)) == 0){
-	    if (subcalendar_type == "soccor") {
-		response = newTellResponse("The next soccor game is on October 27th 2016, against Cal State Dominguez Hills, at Sonoma State. Women at 12:30 P M and Men at 3 P M", false);
+	    if (subcalendar_type == "soccer") {
+		response = newTellResponse("The next soccer game is on October 27th 2016, against Cal State Dominguez Hills, at Sonoma State. Women at 12:30 P M and Men at 3 P M", false);
 		session.removeAttribute(SESSION_SPORTTYPE_STATE);
 	    }
 	    else if (subcalendar_type == "volleyball") {
