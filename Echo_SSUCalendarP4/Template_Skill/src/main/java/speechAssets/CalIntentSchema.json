@@ -1,0 +1,73 @@
+{
+    "intents": [
+	{
+	    "intent": "SSUCalendarIntent",
+	    "slots": [
+		{
+		    "name": "Date",
+		    "type": "AMAZON.DATE"
+		}
+	    ]
+	},
+	{
+	    "intent": "SSUAcademicCalendarIntent",
+	    "slots": [
+		{
+		    "name": "Date",
+		    "type": "AMAZON.DATE"
+		}
+	    ]
+	},
+	{
+	    "intent": "SSUSportingEventsCalendarIntent",
+	    "slots": [
+		{
+		    "name": "Date",
+		    "type": "AMAZON.DATE"
+		}
+	    ]
+	},
+	{
+	    "intent": "WhichCalendarA"
+	},
+	{
+	    "intent:": "WhichCalendarS"
+	},
+	{
+	    "intent": "AMAZON.YesIntent"
+	},
+	{
+	    "intent": "AMAZON.NoIntent"
+	},
+	{
+	    "intent": "soccer"
+	},
+	{
+	    "intent": "volleyball"
+	},
+	{
+	    "intent": "crosscountry"
+	},
+	{
+	    "intent": "golf"
+	},
+	{
+	    "intent": "tennis"
+	},
+	{
+	    "intent": "basketball"
+	},
+	{
+	    "intent": "baseball"
+	},
+	{
+	    "intent": "trackandfield"
+	},
+	{
+	    "intent": "waterpolo"
+	},
+	{
+	    "intent": "softball"
+	}
+    ]
+}
