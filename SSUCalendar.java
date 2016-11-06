@@ -87,12 +87,34 @@ public class SSUCalendar extends Conversation {
 	private final static String STATIC_AR_30 = "on December 8th, spring 2017 registration continues";
 	private final static String STATIC_AR_31 = "on December 9th, Spring 2017 registration continues";
 	private final static String STATIC_AR_32 = "on December 9th, Last day for full term withdrawl with no refund";
-
   //** Add more STATIC_AR_# (academic responses)
+
     private final static String STATIC_SR_1 = "Women's golf tournament on October 25th 2016, at C S U San Marcos";
     private final static String STATIC_SR_2 = "Soccer game on October 27th 2016, against Cal State Dominguez Hills, at Sonoma State. Women at 12:30 P M and Men at 3 P M";
     private final static String STATIC_SR_3 = "Men's tennis match on October 28th 2016, at Saint Mary's Invitational";
-    //** Add more STATIC_SR_# (sport responses)
+    private final static String STATIC_SR_4 = "Women's volleyball on November 17th at C C A A Championship.";
+    private final static String STATIC_SR_5 = "Soccer game on November 18th at N C A A Division 2 Championship Tournament (Day 1 of Third Round and Quarter final). For both Women and Men.";
+    private final static String STATIC_SR_6 = "Women''s volleyball game November 18th at C C A A Championship Tournament, in San Bernardino.";
+    private final static String STATIC_SR_7 = "Women''s basketball game November 18th against Dixie State, in Chico, at 5:30 P M";
+    private final static String STATIC_SR_8 = "Men''s basketball game, November 18th against Saint Martin''s, at Sonoma State, at 7:30 P M";
+    private final static String STATIC_SR_9 = "Soccer game November 19th at N C A A Division 2 Championship Tournament (Day 2 of Third Round and Quarter final). For both Women and Men.";
+    private final static String STATIC_SR_10 = "Women''s volleyball game November 19th at C C A A Championship Tournament, in San Bernardino";
+    private final static String STATIC_SR_11 = "Women''s cross country meet November 19th at N C A A Division 2 Championship, in Saint Leo, Florida";
+    private final static String STATIC_SR_12 = "Women''s basketball game November 19th against Western Oregon at 5:30 P M, at Chico";
+    private final static String STATIC_SR_13 = "Men''s basketball tournament November 19th against San Bernardino and Saint Martins at 5:30 P M, at Sonoma State";
+    private final static String STATIC_SR_14 = "Men''s basketball game November 19th against Academy of Art at 7:30 P M, at Sonoma State";
+    private final static String STATIC_SR_15 = "Soccer game at N C A A Division 2 Championship Tournament November 20th (Day 3 of Third Round and Quarter final). For both Women and Men.";
+    private final static String STATIC_SR_16 = "Soccer game at N C A A Division 2 Championship Tournament November 21st (Day 4 of Third Round and Quarter final). For both Women and Men.";
+    private final static String STATIC_SR_17 = "Men''s basketball game November 25th at Dixie State at 6:30 P M";
+    private final static String STATIC_SR_18 = "Men''s basketball game November 26th against Westminster College at 4 P M, at Dixie State";
+    private final static String STATIC_SR_19 = "Women''s basketball game November 29th at Menlo at 6 P M";
+    private final static String STATIC_SR_20 = "Men''s basketball game December 1st at U C Santa Barbara at 7 P M";
+    private final static String STATIC_SR_21 = "Basketball game December 3rd at Cal State L A. Women at 5:30 P M and Men at 7:30 P M";
+    private final static String STATIC_SR_22 = "Basketball game December 9th against San Francisco State at College of Marin. Women at 5:30 P M and Men at 7:30 P M";
+    private final static String STATIC_SR_23 = "Basketball game December 10th against Cal State Monterey Bay at College of Marin. Women at 5:30 P M and Men at 7:30 P M";
+    private final static String STATIC_SR_24 = "Basketball game December 17th at Chico State. Women at 5:30 P M and Men at 7:30 P M";
+    private final static String STATIC_SR_25 = "Basketball game December 30th against Cal Poly Pomona at Santa Rosa Junior College. Women at 5:30 P M and Men at 7:30 P M";
+    private final static String STATIC_SR_26 = "Basketball game December 31st against Cal State East Bay at Santa Rosa Junior College. Women at 5:30 P M and Men at 7:30 P M";    //** Add more STATIC_SR_# (sport responses)
 
     //Session state storage key
     private final static String SESSION_SSUCALENDAR_STATE = "GeneralCalendarState";
