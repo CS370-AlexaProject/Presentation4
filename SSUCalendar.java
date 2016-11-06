@@ -8,7 +8,7 @@ import com.amazon.speech.speechlet.SpeechletResponse;
 import com.neong.voice.model.base.Conversation;
 import java.util.*;
 
-/**
+/*
  * This is an implementation of a Conversation subclass. It is important to
  *  register your intents by adding them to the supportedIntentNames array in 
  *  the constructor. Your conversation must internally track the current state 
@@ -58,7 +58,7 @@ public class SSUCalendar extends Conversation {
     private final static String STATIC_AR_1 = "On November 14th, registration for spring 2017 begins by appointment";
     private final static String STATIC_AR_2 = "on November 15th, last day to petition to withdraw from a class with a 20 dollar administrative fee";
     private final static String STATIC_AR_3 = "on November 15th, spring 2017 registration by appointment continues";
-	private final static String STATIC_AR_4 = "on November 16th, spring 2017 registration by appointment continues";
+    private final static String STATIC_AR_4 = "on November 16th, spring 2017 registration by appointment continues";
    	private final static String STATIC_AR_5 = "on November 17th, spring 2017 registration by appointment continues"; 
 	private final static String STATIC_AR_6 = "On November 18th, spring 2017 registration by appointment continues";
 	private final static String STATIC_AR_7 = "On November 19th, spring 2017 registration continues";
@@ -87,9 +87,39 @@ public class SSUCalendar extends Conversation {
 	private final static String STATIC_AR_30 = "on December 8th, spring 2017 registration continues";
 	private final static String STATIC_AR_31 = "on December 9th, Spring 2017 registration continues";
 	private final static String STATIC_AR_32 = "on December 9th, Last day for full term withdrawl with no refund";
-  //** Add more STATIC_AR_# (academic responses)
+private final static String STATIC_AR_33 = "on December 10th, Spring 2017 registration continues";
+	private final static String STATIC_AR_34 = "on December 10th, Withdrawls starting this dare considered Retroactive and need to follow the University;s withdrawl policy";
+	private final static String STATIC_AR_35 = "on December 11th, Registration for Spring 2017 continues";
+	private final static String STATIC_AR_36 = "on December 12th, Registration for Spring 2017 continues";
+	private final static String STATIC_AR_37 = "on December 12th, Final week begins";
+	private final static String STATIC_AR_38 = "on December 13th, Registration for Spring 2017 continues";
+	private final static String STATIC_AR_39 = "on December 13th, Finals week continues";
+	private final static String STATIC_AR_40 = "on December 14th, Registration for Spring 2017 continues";
+	private final static String STATIC_AR_41 = "on December 14th, Finals week continues";
+	private final static String STATIC_AR_42 = "on December 15th, Registration for Spring 2017 continues";
+	private final static String STATIC_AR_43 = "on December 15th, Finals week continues";
+	private final static String STATIC_AR_44 = "on Decmeber 16th, Registration for Spring 2017 continues";
+	private final static String STATIC_AR_45 = "on December 16th, Finals week continues";
+	private final static String STATIC_AR_46 = "on December 17th, Registration for Spring 2017 continues";
+	private final static String STATIC_AR_47 = "on December 18th, Registration for Spring 2017 continues";
+	private final static String STATIC_AR_48 = "on December 19th, Registration for Spring 2017 continues";
+	
+	private final static String STATIC_AR_49 = "on December 20th, Registration for Spring 2017 continues";
+	private final static String STATIC_AR_50 = "on December 21st, Registration for Spring 2017 continues";
+	private final static String STATIC_AR_51 = "on December 22nd, Registration for Spring 2017 continues";
+	private final static String STATIC_AR_52 = "on December 23rd, Registration for Spring 2017 continues";
+	private final static String STATIC_AR_53 = "on December 24th, Registration for Spring 2017 continues";
+	private final static String STATIC_AR_54 = "on December 25th, Registration for Spring 2017 continues";
+	// *** Is there supposed to be a STATIC_AR_55?
+	private final static String STATIC_AR_56 = "on December 26th, Registration for Spring 2017 continues";
+	private final static String STATIC_AR_57 = "on December 27th, Registration for Spring 2017 continues";
+	private final static String STATIC_AR_58 = "on December 28th, Registration for Spring 2017 continues";
+	private final static String STATIC_AR_59 = "on December 29th, Registration for Spring 2017 continues";
+	private final static String STATIC_AR_60 = "on December 30th, Registration for Spring 2017 continues";
+	private final static String STATIC_AR_61 = "on December 31st, Registration for Spring 2017 continues";  //** Add more STATIC_AR_# (academic responses)
 
-    private final static String STATIC_SR_1 = "Women's golf tournament on October 25th 2016, at C S U San Marcos";
+    //*** Will need to either get rid of STATIC_SR_1,2, and 3 and fix the listThreeEventsAS function or rename all the other STATIC_SR_’s    
+private final static String STATIC_SR_1 = "Women's golf tournament on October 25th 2016, at C S U San Marcos";
     private final static String STATIC_SR_2 = "Soccer game on October 27th 2016, against Cal State Dominguez Hills, at Sonoma State. Women at 12:30 P M and Men at 3 P M";
     private final static String STATIC_SR_3 = "Men's tennis match on October 28th 2016, at Saint Mary's Invitational";
     private final static String STATIC_SR_4 = "Women's volleyball on November 17th at C C A A Championship.";
@@ -114,7 +144,8 @@ public class SSUCalendar extends Conversation {
     private final static String STATIC_SR_23 = "Basketball game December 10th against Cal State Monterey Bay at College of Marin. Women at 5:30 P M and Men at 7:30 P M";
     private final static String STATIC_SR_24 = "Basketball game December 17th at Chico State. Women at 5:30 P M and Men at 7:30 P M";
     private final static String STATIC_SR_25 = "Basketball game December 30th against Cal Poly Pomona at Santa Rosa Junior College. Women at 5:30 P M and Men at 7:30 P M";
-    private final static String STATIC_SR_26 = "Basketball game December 31st against Cal State East Bay at Santa Rosa Junior College. Women at 5:30 P M and Men at 7:30 P M";    //** Add more STATIC_SR_# (sport responses)
+    private final static String STATIC_SR_26 = "Basketball game December 31st against Cal State East Bay at Santa Rosa Junior College. Women at 5:30 P M and Men at 7:30 P M";    
+    //** Add more STATIC_SR_# (sport responses)
 
     //Session state storage key
     private final static String SESSION_SSUCALENDAR_STATE = "GeneralCalendarState";
@@ -288,7 +319,7 @@ public class SSUCalendar extends Conversation {
 	    //**respose = newAskResponse('String list of 3 events', false, "Would you like me to continue?", false);
 	    //continue_counter++;
 	    //**}
-	    //** continue with if statement...
+	    //** continue with if statements…
 	    session.setAttribute(SESSION_ACADEMICCALENDAR_STATE, STATE_WAITING_CONTINUE); //** this needs to stay out of the if statements
 	}
 	else if (session.getAttribute(SESSION_SPORTCALENDAR_STATE) != null && STATE_WAITING_CONTINUE.compareTo((Integer)session.getAttribute(SESSION_SPORTCALENDAR_STATE)) == 0) {
@@ -341,7 +372,7 @@ public class SSUCalendar extends Conversation {
 
     private SpeechletResponse listNextSpecificSubcalendarEvent(IntentRequest intentreq, Session session, String subcalendar_type) { //** make sure all the dates in here are up to date!
 	SpeechletResponse response = null;
-	if(session.getAttribute(SESSION_ACADEMICTYPE_STATE) != null && STATE_WAITING_WHATSUBCALENDAR.compareTo((Integer)session.getAttribute(SESSION_ACADEMICTYPE_STATE)) == 0){
+	if(session.getAttribute(SESSION_ACADEMICTYPE_STATE) != null && STATE_WAITING_WHATSUBCALENDAR.compareTo((Integer)session.getAttribute(SESSION_ACADEMICTYPE_STATE)) == 0){ //*** need to check if all the events are from Nov 15 and on
 	    if (subcalendar_type == "holiday") {
 		response = newTellResponse("The next school holiday is Veteran's Day on November 11th 2016", false);
 		session.removeAttribute(SESSION_ACADEMICTYPE_STATE);
@@ -355,7 +386,7 @@ public class SSUCalendar extends Conversation {
 		session.removeAttribute(SESSION_ACADEMICTYPE_STATE);
 	    }
 	}
-	else if(session.getAttribute(SESSION_SPORTTYPE_STATE) != null && STATE_WAITING_WHATSUBCALENDAR.compareTo((Integer)session.getAttribute(SESSION_SPORTTYPE_STATE)) == 0){
+	else if(session.getAttribute(SESSION_SPORTTYPE_STATE) != null && STATE_WAITING_WHATSUBCALENDAR.compareTo((Integer)session.getAttribute(SESSION_SPORTTYPE_STATE)) == 0){ //*** need to check if all the events are from Nov 15 and on
 	    if (subcalendar_type == "soccer") {
 		response = newTellResponse("The next soccer game is on October 27th 2016, against Cal State Dominguez Hills, at Sonoma State. Women at 12:30 P M and Men at 3 P M", false);
 		session.removeAttribute(SESSION_SPORTTYPE_STATE);
@@ -376,11 +407,11 @@ public class SSUCalendar extends Conversation {
 		response = newTellResponse("The next tennis match is Mens's tennis on October 28th 2016, at Saint Mary's Invitational", false);
 		session.removeAttribute(SESSION_SPORTTYPE_STATE);
 	    }
-	    else if (subcalendar_type == "basketball") {
+	    else if (subcalendar_type == "basketball") { //** this event needs a date
 		response = newTellResponse("The next basketball game is Women's at San Jose State, at 5 P M", false);
 		session.removeAttribute(SESSION_SPORTTYPE_STATE);
 	    }
-	    else if (subcalendar_type == "baseball") {
+	    else if (subcalendar_type == "baseball") { //** this event needs a date
 		response = newTellResponse("The next baseball game is against San Francisco State, at Sonoma State, at 11 A M", false);
 		session.removeAttribute(SESSION_SPORTTYPE_STATE);
 	    }
