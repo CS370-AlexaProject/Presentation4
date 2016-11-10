@@ -69,7 +69,7 @@ public class MoonlightAPI {
     private String JSONEventToAlexaLiteral(JSONObject event) throws JSONException, ParseException {
         return "On" + JSONDateToAlexaLiteral(event.getString("start_date")) + ", "  // date of event
                 + "there is a " + event.getString("title") + " event "  // name of event
-                + JSONTimeToAlexaLiteral(event.getString("start_date"),event.getString("end_date"));  // time of event
+                + JSONTimeToAlexaLiteral(event.getString("start_date"),event.getString("end_date") + ". ");  // time of event
     }
 
     private ArrayList<JSONObject> getFromAPIByAlexaDate(String alexaDate) throws Exception {
