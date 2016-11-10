@@ -1,12 +1,14 @@
 package com.neong.voice.example;
 
 import com.amazon.speech.slu.Intent;
+import com.amazon.speech.slu.Slot;
 import com.amazon.speech.speechlet.IntentRequest;
 import com.amazon.speech.speechlet.Session;
-import com.amazon.speech.slu.Slot;
 import com.amazon.speech.speechlet.SpeechletResponse;
 import com.neong.voice.model.base.Conversation;
-import java.util.*;
+
+import java.util.ArrayList;
+import java.util.Map;
 
 /**
  * This is an implementation of a Conversation subclass. It is important to
@@ -18,7 +20,11 @@ import java.util.*;
  */
 
 public class SSUCalendar extends Conversation {
-    //Intent names
+    //Globals
+	private static MoonlightAPI api = new MoonlightAPI();
+	private static ArrayList<String> events = null;
+
+	//Intent names
     private final static String INTENT_SSUCALENDAR = "SSUCalendarIntent"; // General Calendar
     private final static String INTENT_SSUACADEMICC = "SSUAcademicCalendarIntent"; // Going straight to Academic Calendar
     private final static String INTENT_SSUSPORTSC = "SSUSportingEventsCalendarIntent"; // Going straight to Sporting Events Calendar
@@ -106,7 +112,19 @@ public class SSUCalendar extends Conversation {
 	    if (INTENT_SSUCALENDAR.equals(intentName)) { //#1 //Works
 		Slot dateSlot = slots.get("Date");
 		String dateRequest = dateSlot.getValue();
-		response = listThreeEventsGASIntent(GENERAL_CALENDAR, intentReq, session);
+
+		// get events based on date
+		events = api.getEvents(dateRequest);
+
+
+		//response = listThreeEventsGASIntent(GENERAL_CALENDAR, intentReq, session);
+		String res = "";
+		if(events.size() >= 1) {
+			response = newAskResponse(events.get(0) + " " + "Would you like me to continue?", false, "Would you like me to continue?", false);
+			events.remove(0);
+		}
+		else
+			response = newAskResponse("No more events. " + "Would you like me to continue?", false, "Would you like me to continue?", false);
 	    }
 	    else if (INTENT_SSUACADEMICC.equals(intentName)) { //#2 //Works
 		response = handleWhatSubcalendarType(intentReq, session, ACADEMIC_CALENDAR);
@@ -125,7 +143,13 @@ public class SSUCalendar extends Conversation {
 	    else if("AMAZON.YesIntent".equals(intentName)) {
 		// Continuing Specific Calendars
 		if (session.getAttribute(SESSION_ACADEMICCALENDAR_STATE) != null && STATE_WAITING_CONTINUE.compareTo((Integer)session.getAttribute(SESSION_ACADEMICCALENDAR_STATE)) == 0) {
-		    response = listThreeEventsASIntent(ACADEMIC_CALENDAR, intentReq, session);
+		    //response = listThreeEventsASIntent(ACADEMIC_CALENDAR, intentReq, session);
+			if(events.size() >= 1) {
+				response = newAskResponse(events.get(0) + " " + "Would you like me to continue?", false, "Would you like me to continue?", false);
+				events.remove(0);
+			}
+			else
+				response = newAskResponse("No more events. " + "Would you like me to continue?", false, "Would you like me to continue?", false);
 		}
 		else if (session.getAttribute(SESSION_SPORTCALENDAR_STATE) != null && STATE_WAITING_CONTINUE.compareTo((Integer)session.getAttribute(SESSION_SPORTCALENDAR_STATE)) == 0){
 		    response = listThreeEventsASIntent(SPORTS_CALENDAR, intentReq, session);

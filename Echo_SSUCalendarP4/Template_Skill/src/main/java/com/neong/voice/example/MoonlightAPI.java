@@ -112,7 +112,7 @@ public class MoonlightAPI {
     }
 
     private String JSONDateToAlexaLiteral(String inputDate) throws ParseException {
-        return " <say-as interpret-as=\"date\">" + inputDate.substring(0,10) + "</say-as> ";
+        return " " + inputDate.substring(0,10) + " ";
     }
 
     private ArrayList<Date> parseAlexaDate(String alexaDate) throws ParseException {
