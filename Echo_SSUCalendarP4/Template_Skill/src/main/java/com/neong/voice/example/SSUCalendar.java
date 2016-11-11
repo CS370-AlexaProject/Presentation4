@@ -71,7 +71,7 @@ public class SSUCalendar extends Conversation {
     private static ArrayList<String> events = null;
 
     //Response strings
-    private final static String RESPONSE_NOMOREEVENTS = "There are no more events on that date.";
+    private final static String RESPONSE_NOMOREEVENTS = "Okay. What date?";
     private final static String RESPONSE_BADEND = "Did you even listen to my question?";
     private final static String RESPONSE_GOODEND = "Have a nice day!";
 
@@ -122,10 +122,12 @@ public class SSUCalendar extends Conversation {
         // Continue
         else if ("AMAZON.YesIntent".equals(intentName)) {
             // listevents has events in it
-            if(STATE_HAS_EVENTS.compareTo((Integer)session.getAttribute(SESSION_LISTEVENTS_STATE)) == 0)
+            if(SESSION_LISTEVENTS_STATE != null &&
+                    STATE_HAS_EVENTS.compareTo((Integer)session.getAttribute(SESSION_LISTEVENTS_STATE)) == 0)
                 response = listThreeEventsAsIntent(session);
-            else if(STATE_NO_EVENTS.compareTo((Integer)session.getAttribute(SESSION_LISTEVENTS_STATE)) == 0) { // listevents has no events in it
-                response = newTellResponse(RESPONSE_NOMOREEVENTS, true);
+            else if(SESSION_LISTEVENTS_STATE != null &&
+                    STATE_NO_EVENTS.compareTo((Integer)session.getAttribute(SESSION_LISTEVENTS_STATE)) == 0) {
+                response = newAskResponse(RESPONSE_NOMOREEVENTS, false, RESPONSE_NOMOREEVENTS, false);
             }
             else {
                 response = newTellResponse(RESPONSE_BADEND, true);
@@ -138,17 +140,6 @@ public class SSUCalendar extends Conversation {
             }
         } else{
             response = newTellResponse(RESPONSE_BADEND, false);
-        }
-        return response;
-    }
-
-    private SpeechletResponse listThreeEventsGASIntent(int calendar_type, IntentRequest intentreq, Session session) { //#1 //Works
-        SpeechletResponse response = null;
-        if (calendar_type == GENERAL_CALENDAR) {
-            response = newAskResponse(STATIC_AR_1 + "," + STATIC_SR_1 + "," + STATIC_AR_2 + "," + "What calendar did you want specifically?", false, "What calendar did you want specifically?", false);
-            session.setAttribute(SESSION_SSUCALENDAR_STATE, STATE_WAITING_WHATCALENDAR);
-        } else {
-            response = newTellResponse("I don't have any information about that.", false);
         }
         return response;
     }
@@ -168,17 +159,16 @@ public class SSUCalendar extends Conversation {
             numEventsRetrieved = events.size();
 
         for(int i = 0; i < numEventsRetrieved; i++){
-            responseString += events.get(0) + " ";
+            responseString += events.get(0) + ". ";
             events.remove(0);
         }
 
-        if(responseString == "")
-            responseString = "No events found. ";
-
-        if(events.size() == 0)
+        if(events.size() == 0) {
             session.setAttribute(SESSION_LISTEVENTS_STATE, STATE_NO_EVENTS);
-
-        return newAskResponse(responseString + "Would you like me to continue?", false, "Would you like me to continue?", false);
+            return newAskResponse(responseString + " Those are all the events I have information on. Would you like to hear about another date?", false, "Would you like to hear about another date?", false);
+        }
+        else
+            return newAskResponse(responseString + "Would you like me to continue?", false, "Would you like me to continue?", false);
     }
 
 

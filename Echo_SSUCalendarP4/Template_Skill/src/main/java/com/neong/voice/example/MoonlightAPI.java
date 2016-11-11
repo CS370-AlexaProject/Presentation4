@@ -1,5 +1,4 @@
 package com.neong.voice.example;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -20,6 +19,20 @@ import java.util.Date;
  CLASS  : com.neong.voice.example.MoonlightAPI
  ********************************************/
 public class MoonlightAPI {
+    // Month variables
+    static final String JAN = "January";
+    static final String FEB = "February";
+    static final String MAR = "March";
+    static final String APR = "April";
+    static final String MAY = "May";
+    static final String JUN = "June";
+    static final String JUL = "July";
+    static final String AUG = "August";
+    static final String SEP = "September";
+    static final String OCT = "October";
+    static final String NOV = "November";
+    static final String DEC = "December";
+
     // Date variables
     static final String DATE_PATTERN = "yyyy-MM-dd'T'HH:mm:ssX";
     static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat(DATE_PATTERN);
@@ -67,9 +80,13 @@ public class MoonlightAPI {
     }
 
     private String JSONEventToAlexaLiteral(JSONObject event) throws JSONException, ParseException {
-        return "On" + JSONDateToAlexaLiteral(event.getString("start_date")) + ", "  // date of event
+        /*return "On" + JSONDateToAlexaLiteral(event.getString("start_date")) + ", "  // date of event
                 + "there is a " + event.getString("title") + " event "  // name of event
-                + JSONTimeToAlexaLiteral(event.getString("start_date"),event.getString("end_date") + ". ");  // time of event
+                + JSONTimeToAlexaLiteral(event.getString("start_date"),event.getString("end_date"));  // time of event*/
+        return event.getString("title") + // name of event
+                ", " + JSONTimeToAlexaLiteral(event.getString("start_date"),event.getString("end_date")) +
+                " on" + JSONDateToAlexaLiteral(event.getString("start_date"));
+
     }
 
     private ArrayList<JSONObject> getFromAPIByAlexaDate(String alexaDate) throws Exception {
@@ -80,7 +97,7 @@ public class MoonlightAPI {
 
     private String JSONTimeToAlexaLiteral(String inputStartTime, String inputEndTime){
         String startHour = inputStartTime.substring(11,13);
-        String startMinute = inputEndTime.substring(14,16);
+        String startMinute = inputStartTime.substring(14,16);
         String endHour = inputEndTime.substring(11,13);
         String endMinute = inputEndTime.substring(14,16);
 
@@ -89,30 +106,86 @@ public class MoonlightAPI {
             return "";
 
         // Converts the 24 hour time to 12 hour times
-        // badly. this doesn't work. but the 24 time returns correctly
-        /*
         int startHourInt = Integer.parseInt(startHour);
         if(startHourInt > 12) {
             startHourInt -= 12;
-            startHour = String.valueOf(startHourInt);
-            if(startHour.length() < 2)
-                startHour = "0" + startHour;
         }
+        startHour = String.valueOf(startHourInt);
 
         int endHourInt = Integer.parseInt(endHour);
         if(endHourInt > 12) {
             endHourInt -= 12;
-            endHour = String.valueOf(endHourInt);
-            if(endHour.length() < 2)
-                endHour = "0" + endHour;
         }
-        */
-        return "at " + startHour + ":" + startMinute + "-" + endHour + ":" + endMinute;
+        endHour = String.valueOf(endHourInt);
+
+        if(startHourInt == 0)
+            startHour = "12";
+        if(endHourInt == 0)
+            endHour = "12";
+
+        String res = "at " + startHour + ":" + startMinute + " to " + endHour + ":" + endMinute;
+        return res;
 
     }
 
     private String JSONDateToAlexaLiteral(String inputDate) throws ParseException {
-        return " " + inputDate.substring(0,10) + " ";
+        int year = Integer.parseInt(inputDate.substring(0,4)),
+                month = Integer.parseInt(inputDate.substring(5,7)),
+                day = Integer.parseInt(inputDate.substring(8,10));
+        String yearString = String.valueOf(year),
+                monthString = "",
+                dayString = String.valueOf(day),
+                res;
+
+        Date today = Calendar.getInstance().getTime();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(today);
+        int thisYear = cal.get(Calendar.YEAR);
+
+        switch (month) {
+            case 1:
+                monthString = "January";
+                break;
+            case 2:
+                monthString = "February";
+                break;
+            case 3:
+                monthString = "March";
+                break;
+            case 4:
+                monthString = "April";
+                break;
+            case 5:
+                monthString = "May";
+                break;
+            case 6:
+                monthString = "June";
+                break;
+            case 7:
+                monthString = "July";
+                break;
+            case 8:
+                monthString = "August";
+                break;
+            case 9:
+                monthString = "September";
+                break;
+            case 10:
+                monthString = "October";
+                break;
+            case 11:
+                monthString = "November";
+                break;
+            case 12:
+                monthString = "December";
+                break;
+        }
+
+        //return " " + inputDate.substring(0,10) + " ";
+        res = " " + monthString + " " + dayString;
+        if(thisYear < year)
+            res += ", " + yearString;
+        return res;
     }
 
     private ArrayList<Date> parseAlexaDate(String alexaDate) throws ParseException {
@@ -132,7 +205,7 @@ public class MoonlightAPI {
                 String yearDate = alexaDate + "-01-01";
                 results.add(ALEXA_DATE_FORMAT.parse(yearDate + "T00:00:00"));
                 yearDate = alexaDate + "-12-31";
-                results.add(ALEXA_DATE_FORMAT.parse(yearDate + "T00:00:00"));
+                results.add(ALEXA_DATE_FORMAT.parse(yearDate + "T23:59:59"));
             }
         }
         else if(alexaDate.contains("WI")){
@@ -141,25 +214,25 @@ public class MoonlightAPI {
             int winterYear = Integer.parseInt(winterDate.substring(0,4));
             winterYear++;
             winterDate = String.valueOf(winterYear) + "-02-28";
-            results.add(ALEXA_DATE_FORMAT.parse(winterDate + "T00:00:00"));
+            results.add(ALEXA_DATE_FORMAT.parse(winterDate + "T23:59:59"));
         }
         else if(alexaDate.contains("SP")){
             String springDate = alexaDate.substring(0,4) + "-03-01";
             results.add(ALEXA_DATE_FORMAT.parse(springDate + "T00:00:00"));
             springDate = springDate.substring(0,4) + "-05-31";
-            results.add(ALEXA_DATE_FORMAT.parse(springDate + "T00:00:00"));
+            results.add(ALEXA_DATE_FORMAT.parse(springDate + "T23:59:59"));
         }
         else if(alexaDate.contains("SU")){
             String summerDate = alexaDate.substring(0,4) + "-06-01";
             results.add(ALEXA_DATE_FORMAT.parse(summerDate + "T00:00:00"));
             summerDate = summerDate.substring(0,4) + "-08-31";
-            results.add(ALEXA_DATE_FORMAT.parse(summerDate + "T00:00:00"));
+            results.add(ALEXA_DATE_FORMAT.parse(summerDate + "T23:59:59"));
         }
         else if(alexaDate.contains("FA")){
             String fallDate = alexaDate.substring(0,4) + "-09-01";
             results.add(ALEXA_DATE_FORMAT.parse(fallDate + "T00:00:00"));
             fallDate = fallDate.substring(0,4) + "-10-30";
-            results.add(ALEXA_DATE_FORMAT.parse(fallDate + "T00:00:00"));
+            results.add(ALEXA_DATE_FORMAT.parse(fallDate + "T23:59:59"));
         }
         else if(alexaDate.contains("WE")){
             Calendar cal = Calendar.getInstance();
